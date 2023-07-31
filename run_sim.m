@@ -63,7 +63,7 @@ function sol = solve(lags, tspan, nx, ny, alpha, v, C0, gamma, k, mu, alpha_p, g
               dXdt(x,y) = alpha * (1 + v*Plag(x,y)) / ((1 + Xlag(x,y)/C0)^2) - gamma * X(x,y) / (k + X(x,y));
               dPdt(x,y) = mu + alpha_p * X(x,y) - gamma_p * P(x,y) + D * delP / (delta^2);
               if input_set(x,y)
-                  dPdt(x,y) = dPdt(x,y) + input(t, mag, T, input_phase(x,y)*pi);
+                  dPdt(x,y) = dPdt(x,y) + input(t, mag, T, input_phase(x,y)*pi/180);
               end
           end
       end
