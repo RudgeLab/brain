@@ -21,7 +21,7 @@ for i=1:nreps
 	%idx = all_idxs((input_idx - 1) * nreps + i);
 	idx = (input_idx - 1) * nreps + i;
 
-	% Use same seed for al	l nodes to generate same mapping
+	% Use same seed for all nodes to generate same mapping
 	stream = RandStream('mt19937ar','seed', 1);
 	RandStream.setGlobalStream(stream);
 
