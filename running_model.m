@@ -49,9 +49,11 @@ timeminn = 0:minn:500;
 
 % for now I will interpolate LuxI and imagine that it is same as GFP which
 % I would observe
-LuxIminn = interp1(time,LuxI, timeminn);
+LuxIminn = interp1(time,LuxI, timeminn, "spline");
 % graph
+figure(4);
 plot(time,LuxI,'o',timeminn,LuxIminn,':.');
+
 %% 
 % % alternative array with measurement every 10 mins, to replicate measuring
 % % system every 10 minutes
