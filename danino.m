@@ -1,5 +1,11 @@
 
 function sol = danino(period, phase, coupling, tspan, n)
+% period is the natural period of the oscillator
+% phase is what phase the input signal starts at
+% coupling is whether SHIL is present or not - input 0 or 1
+% tspan is an array. Represents number if minutes over which the simulation is running.
+% n is how many times higher is the frequency of SHIL signal compared to
+                                                 % the natural frequency
     lags = [10];        % time delays
     CA = 1;             % Copy number of AiiA
     CI = 4;             % Copy number of LuxI
