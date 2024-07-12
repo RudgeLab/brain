@@ -29,17 +29,31 @@ time = ans.x;
 % hold off
 
 %% 
-tmin = min(diff(time)); % smallest time step
-timeminn = 0:tmin:max(time); % an array with evenly spaced time points
-LuxIminn = interp1(time,LuxI, timeminn, "spline"); % interpolare LuxI
+% % if time step = smallest time step
+% tmin = min(diff(time)); % smallest time step
+% timeminn = 0:tmin:max(time); % an array with evenly spaced time points
+% LuxIminn = interp1(time,LuxI, timeminn, "spline"); % interpolare LuxI
+% 
+% % graph
+% % figure(4);
+% % plot(time,LuxI,'o',timeminn,LuxIminn,':.');
+% % legend("LuxI", "Intrapolated LuxI")
+% % xlabel("Time(min)")
+% % ylabel("AU")
+% 
+% LuxIperiod = compute_period(LuxIminn,tmin); % compute period based on LuxI
+%% 
+t = 1; % time step
+timeq = 0:t:max(time); % an array with evenly spaced time points equal to t
+LuxIeq = interp1(time,LuxI, timeq, "spline"); % interpolare LuxI
 
 % graph
-% figure(4);
-% plot(time,LuxI,'o',timeminn,LuxIminn,':.');
-% legend("LuxI", "Intrapolated LuxI")
-% xlabel("Time(min)")
-% ylabel("AU")
+figure(5);
+plot(time,LuxI,'o',timeq,LuxIeq,':.');
+legend("LuxI", "Intrapolated LuxI")
+xlabel("Time(t)")
+ylabel("AU")
 
-LuxIperiod = compute_period(LuxIminn,tmin); % compute period based on LuxI
+LuxIperiod = compute_period(LuxIeq,t); % compute period based on LuxI
 
 
