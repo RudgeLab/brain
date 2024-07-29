@@ -33,7 +33,7 @@ function periods = SHIL_coupling(model, tspan, couplings, n)
         sol = model(period, phase, coupling, tspan, n);
         y = sol.y;
         t = sol.x;
-        iy1 = interp1(t, y(1,:), T);
+        iy1 = interp1(t, y(1,:), T); % interpolate AiiA, non-spline
 
         p = compute_period(iy1, dt)
         periods(end+1) = p;
@@ -44,6 +44,10 @@ function periods = SHIL_coupling(model, tspan, couplings, n)
         plot(T(ts:end), input_signal(ts:end) * max(iy1), 'g--');
         plot(T(ts:end), iy1(ts:end), 'b');
         title(gca, sprintf('%f', coupling));
+        legend("?", "SHIL signal", "AiiA")
+        xlabel("Time(t)")
+        ylabel("AU")
+
     end
     
     figure();
