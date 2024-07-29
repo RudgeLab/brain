@@ -1,7 +1,12 @@
 % Demonstrate injection locking of Danino oscillator to input AHL
 function periods = SHIL_coupling(model, tspan, couplings, n)
+% model - input @_model_
+% tspan - time range in mins
+% couplings - a range of how much of SHIL molecule is added per time step
+% n - is how many times higher is the frequency of SHIL signal compared to
+                                                   % the natural frequency
     ts = round(mean(tspan));
-    T = linspace(tspan(1), tspan(2), 1440);
+    T = linspace(tspan(1), tspan(2), 1440); % generate 1440 evenly spaced time points
     dt = mean(diff(T));
     phase = 0
     periods = []
@@ -10,8 +15,8 @@ function periods = SHIL_coupling(model, tspan, couplings, n)
     sol = model(1, 0, 0, tspan, n);
     y = sol.y;
     t = sol.x;
-    iy1ref = interp1(t, y(1,:), T);
-    plot(T, iy1ref);
+    iy1ref = interp1(t, y(1,:), T); % interpolate AiiA, non-spline
+    plot(T, iy1ref); % plot AiiA against time
     % Compute period from last half of data
     period  = compute_period(iy1ref, dt);
     period
