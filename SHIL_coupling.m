@@ -17,6 +17,10 @@ function periods = SHIL_coupling(model, tspan, couplings, n)
     t = sol.x;
     iy1ref = interp1(t, y(1,:), T); % interpolate AiiA, non-spline
     plot(T, iy1ref); % plot AiiA against time
+    legend("AiiA")
+    xlabel("Time(t)")
+    ylabel("AU")
+    title("Without coupling")
     % Compute period from last half of data
     period  = compute_period(iy1ref, dt);
     period
