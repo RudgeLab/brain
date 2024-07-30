@@ -51,7 +51,14 @@ function periods = SHIL_coupling(model, tspan, couplings, n)
     end
     
     figure();
-    plot(couplings,  periods,  'r.', markersize=20);
-    xlabel('coupling');
-    ylabel('period');
+    if std(diff(couplings))>=0.1 % check standard deviation of couplings 
+                                 % to determine if x is log or linear
+        semilogx(couplings,  periods,  'r.', markersize=20)
+    else 
+        plot(couplings,  periods,  'r.', markersize=20);
+    end
+    xlabel('Coupling (AU)');
+    ylabel('Period(t)');
+    title("Correlation between couplings and period")
+    grid on
 end
