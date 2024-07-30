@@ -43,7 +43,7 @@ function periods = SHIL_coupling(model, tspan, couplings, n)
         plot(T(ts:end), ref_signal(ts:end) * max(iy1), 'r--');
         plot(T(ts:end), input_signal(ts:end) * max(iy1), 'g--');
         plot(T(ts:end), iy1(ts:end), 'b');
-        title(gca, sprintf('%f', coupling));
+        title(sprintf('Coupling = %0.3g', coupling));
         legend("?", "SHIL signal", "AiiA")
         xlabel("Time(t)")
         ylabel("AU")
