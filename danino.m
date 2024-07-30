@@ -2,7 +2,9 @@
 function sol = danino(period, phase, coupling, tspan, n)
 % period is the natural period of the oscillator
 % phase is what phase the input signal starts at
-% coupling is whether SHIL is present or not - input 0 or 1
+% coupling is whether SHIL is present or not - input should be a low
+                                             % number, can be determined
+                                             % with SHIL_coupling
 % tspan is an array. Represents number if minutes over which the simulation is running.
 % n is how many times higher is the frequency of SHIL signal compared to
                                                  % the natural frequency
@@ -59,7 +61,7 @@ function sol = solve(lags, tspan, CA, CI, del, alpha, k, k1, b, gammaA, gammaI, 
     end
 
     function s = shil_signal(t, n)
-        s = prof_pulse(t, period/n, phase*n); 
+        s = prof_pulse(t, period/n, phase*n); % should output whether input sq. wave is at peak or not - 1 or 0
         % if t<period*4
         %     s = prof_pulse(t, period, phase);
         % elseif t<period*8
