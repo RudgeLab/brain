@@ -51,7 +51,7 @@ function periods = SHIL_coupling(model, tspan, couplings, n)
     end
     
     figure();
-    if std(diff(couplings))>=0.1 % check standard deviation of couplings 
+    if std(diff(couplings))>=0.000001 % check standard deviation of couplings 
                                  % to determine if x is log or linear
         semilogx(couplings,  periods,  'r.', markersize=20)
     else 
