@@ -33,10 +33,14 @@ function [phases, ref_phase_lags, phase_lags, shil_phase_lags] = SHIL(model, tsp
         sol = model(period, phase, coupling, tspan, n);
         y = sol.y;
         t = sol.x;
-        iy1 = interp1(t, y(1,:), T);
+        iy1 = interp1(t, y(1,:), T); % interpolate AiiA, non-spline
         figure();
-        plot(T, iy1);
-
+        plot(T, iy1);                % plot AiiA against time
+        legend("AiiA")
+        xlabel("Time(t)")
+        ylabel("AU")
+        title(sprintf('Phase = %0.5g rad, Coupling = %0.5g', phase, coupling))
+        
         % Compute phase lag of result to reference signal, using last half of data
         phase_lag = compute_phase(iy1(ts:end), ref_signal(ts:end), period, dt)
         phase_lags(end+1) = phase_lag;
