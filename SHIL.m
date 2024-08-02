@@ -4,16 +4,21 @@ function [phases, ref_phase_lags, phase_lags, shil_phase_lags] = SHIL(model, tsp
     dt = mean(diff(T));
     
     % Reference with no coupling to compute period
-    sol = model(68, 0, 0, tspan, n);
+    sol = model(68, 0, 0, tspan, n); % why 68 here? It does not seem to get used
     y = sol.y;
     t = sol.x;
-    iy1ref = interp1(t, y(1,:), T);
-    plot(T, iy1ref);
+    iy1ref = interp1(t, y(1,:), T); % interpolate AiiA, non-spline
+    plot(T, iy1ref);                % plot AiiA against time
+    legend("AiiA")
+    xlabel("Time(t)")
+    ylabel("AU")
+    title("Without coupling")
+
     % Compute period from last half of data
     period  = compute_period(iy1ref(721:end), dt);
     period
 
-    ts = round(1440 - period * 6);  
+    ts = round(1440 - period * 6);  % why 6?
     
     phase_lags = [];
     ref_phase_lags = [];
@@ -21,8 +26,8 @@ function [phases, ref_phase_lags, phase_lags, shil_phase_lags] = SHIL(model, tsp
     % Input and reference signal
     phases = linspace(0, pi, 8);
     for phase = phases
-        input_signal = prof_pulse(T, period/n, phase*n);
-        ref_signal = prof_pulse(T, period, phase);
+        input_signal = prof_pulse(T, period/n, phase*n); % SHIL signal?
+        ref_signal = prof_pulse(T, period, phase); % reference signal
         
         % Simulate system with input at SHIL frequency (half natural period)
         sol = model(period, phase, coupling, tspan, n);
