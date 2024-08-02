@@ -39,7 +39,7 @@ function [phases, ref_phase_lags, phase_lags, shil_phase_lags] = SHIL(model, tsp
         legend("AiiA")
         xlabel("Time(t)")
         ylabel("AU")
-        title(sprintf('Phase = %0.5g rad, Coupling = %0.5g', phase, coupling))
+        title(sprintf('After SHIL. Phase = %0.5g rad, Coupling = %0.5g', phase, coupling))
         
         % Compute phase lag of result to reference signal, using last half of data
         phase_lag = compute_phase(iy1(ts:end), ref_signal(ts:end), period, dt)
