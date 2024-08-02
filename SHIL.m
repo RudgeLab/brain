@@ -27,7 +27,7 @@ function [phases, ref_phase_lags, phase_lags, shil_phase_lags] = SHIL(model, tsp
     phases = linspace(0, pi, 8);
     for phase = phases
         input_signal = prof_pulse(T, period/n, phase*n); % SHIL signal?
-        ref_signal = prof_pulse(T, period, phase); % reference signal
+        ref_signal = prof_pulse(T, period, phase); % reference signal?
         
         % Simulate system with input at SHIL frequency (half natural period)
         sol = model(period, phase, coupling, tspan, n);
@@ -61,7 +61,10 @@ function [phases, ref_phase_lags, phase_lags, shil_phase_lags] = SHIL(model, tsp
         plot(T(ts:end), input_signal(ts:end) * max(iy1), 'g--');
         plot(T(ts:end), iy1(ts:end), 'b');
         plot(T(ts:end), iy1ref(ts:end), 'k');
-        title(gca, sprintf('%f', phase_lag));
+        legend("Reference signal", "SHIL input", "AiiA post SHIL", "AiiA pre-SHIL")
+        xlabel("Time(t)")
+        ylabel("AU")
+        title(gca, sprintf('Phase lag = %0.5g', phase_lag));
     end
     
     ref_phase_lags
